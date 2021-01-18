@@ -8,3 +8,13 @@ h3 {
 .rating span {
 	margin: 0.1rem;
 }
+
+.bg-orange {
+	background-color: #eed8ca;
+}
+.bg-green {
+	background-color: #c7e0ca;
+}
+.bg-turkuaz {
+	background-color: #a8d4df;
+}
