@@ -4,17 +4,17 @@ import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
 import Rating from '../components/Rating'
 import axios from 'axios'
 
-const ProductScreen = props => {
+const ProductScreen = ({ match }) => {
 	const [product, setProduct] = useState({})
 
 	const fetchProduct = async () => {
-		const { data } = await axios.get(`/api/products/${props.match.params.id}`)
+		const { data } = await axios.get(`/api/products/${match.params.id}`)
 		setProduct(data)
 	}
 
 	useEffect(() => {
 		fetchProduct()
-	}, [])
+	}, [match])
 
 	return (
 		<>
