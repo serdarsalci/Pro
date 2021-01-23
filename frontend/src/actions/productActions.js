@@ -29,7 +29,10 @@ export const listProducts = () => async dispatch => {
 }
 
 // experimental
-export const getSingleProduct = (products, id) => async dispatch => {
+export const getSingleProduct = (products, id) => async (
+	dispatch,
+	getState
+) => {
 	try {
 		dispatch({ type: GET_SINGLE_PRODUCT, payload: products, id: id })
 		console.log(products)
@@ -43,6 +46,10 @@ export const getSingleProduct = (products, id) => async dispatch => {
 					: error.message,
 		})
 	}
+	localStorage.setItem(
+		'product',
+		JSON.stringify(getState().productList.product)
+	)
 }
 
 export const listProductDetails = id => async dispatch => {

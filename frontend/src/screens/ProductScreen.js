@@ -12,21 +12,27 @@ const ProductScreen = ({ history, match }) => {
 	const dispatch = useDispatch()
 
 	const productDetails = useSelector(state => state.productDetails)
-	// const { loading, error, product } = productDetails
+	const { loading, error, product } = productDetails
 
 	const productList = useSelector(state => state.productList)
-	let { products, product = {}, error, loading } = productList
+	//	let { products, product = {}, error, loading } = productList
+
+	if (!product) {
+		console.log('no prod in state')
+	} else {
+		console.log('product var')
+	}
 
 	// let { product } = productList
 
-	// useEffect(() => {
-	// 	dispatch(listProductDetails(match.params.id))
-	// }, [dispatch, match])
-
 	useEffect(() => {
-		console.log(typeof product)
-		dispatch(getSingleProduct(products, match.params.id))
+		dispatch(listProductDetails(match.params.id))
 	}, [dispatch, match])
+
+	// useEffect(() => {
+	// 	console.log(typeof product)
+	// 	dispatch(getSingleProduct(products, match.params.id))
+	// }, [dispatch, match])
 
 	const addToCartHandler = () => {
 		history.push(`/cart/${match.params.id}?qty=${qty}`)
