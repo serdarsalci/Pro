@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
 import Rating from '../components/Rating'
-import { getSingleProduct, listProductDetails } from '../actions/productActions'
+import {
+	getSingleProduct,
+	listProductDetails,
+	test,
+} from '../actions/productActions'
 import Loader from '../components/Loader'
 import Message from '../components/Messsage'
 
@@ -13,9 +17,6 @@ const ProductScreen = ({ history, match }) => {
 
 	const productDetails = useSelector(state => state.productDetails)
 	const { loading, error, product } = productDetails
-
-	const productList = useSelector(state => state.productList)
-	//	let { products, product = {}, error, loading } = productList
 
 	if (!product) {
 		console.log('no prod in state')
@@ -38,8 +39,19 @@ const ProductScreen = ({ history, match }) => {
 		history.push(`/cart/${match.params.id}?qty=${qty}`)
 	}
 
+	const testHandler = () => {
+		dispatch(test())
+	}
+
 	return (
 		<>
+			<ListGroup>
+				<ListGroup.Item>
+					<Button onClick={testHandler} className='btn-block' type='button'>
+						test button
+					</Button>
+				</ListGroup.Item>
+			</ListGroup>
 			<Link className='btn btn-light my-3' to='/'>
 				<i className='fas fa-chevron-left'></i> Go Back
 			</Link>

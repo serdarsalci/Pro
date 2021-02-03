@@ -7,6 +7,7 @@ import {
 	PRODUCT_LIST_REQUEST,
 	PRODUCT_LIST_SUCCESS,
 	GET_SINGLE_PRODUCT,
+	TEST,
 } from '../constants/productConstants'
 
 export const listProducts = () => async dispatch => {
@@ -69,4 +70,10 @@ export const listProductDetails = id => async dispatch => {
 					: error.message,
 		})
 	}
+}
+
+export const test = () => async dispatch => {
+	dispatch({
+		type: TEST,
+	})
 }

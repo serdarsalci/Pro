@@ -6,6 +6,7 @@ import {
 	PRODUCT_LIST_FAIL,
 	PRODUCT_LIST_REQUEST,
 	PRODUCT_LIST_SUCCESS,
+	TEST,
 } from '../constants/productConstants'
 
 export const productListReducer = (
@@ -16,14 +17,13 @@ export const productListReducer = (
 		case PRODUCT_LIST_REQUEST:
 			return { loading: true }
 		case PRODUCT_LIST_SUCCESS:
-			return { loading: false, products: action.payload, hello: 'hello' }
+			return { loading: false, products: action.payload }
 		case PRODUCT_LIST_FAIL:
 			return { loading: false, error: action.payload }
 		case GET_SINGLE_PRODUCT:
 			const products = action.payload
 			const product = products.filter(prod => prod._id === action.id)[0]
 			return { loading: false, product, products }
- 
 		default:
 			return state
 	}

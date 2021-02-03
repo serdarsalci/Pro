@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Messsage'
 import { Row, Col, ListGroup, Image, Button, Card, Form } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { addToCart, removeFromCart } from '../actions/cartActions'
+import { addToCart, emptyCart, removeFromCart } from '../actions/cartActions'
 
 const CartScreen = ({ match, location, history }) => {
 	const productId = match.params.id
+
+	console.log(match)
 
 	const qty = location.search ? Number(location.search.split('=')[1]) : 1
 
@@ -19,14 +21,17 @@ const CartScreen = ({ match, location, history }) => {
 			dispatch(addToCart(productId, qty))
 		}
 	}, [dispatch, productId, qty])
-	console.log(qty)
 
 	const removeFromCartHandler = id => {
 		dispatch(removeFromCart(id))
 	}
 
 	const checkoutHandler = () => {
-		history.push('/login?redirect=shipping')
+		history.push('/login?redirect=shipping') 
+	}
+	const emptyCartHandler = () => {
+		dispatch(emptyCart())
+		history.push('/cart')
 	}
 
 	return (
@@ -104,6 +109,15 @@ const CartScreen = ({ match, location, history }) => {
 								disabled={cartItems.length === 0}
 								onClick={checkoutHandler}>
 								Proced to Checkout
+							</Button>
+						</ListGroup.Item>
+						<ListGroup.Item>
+							<Button
+								type='button'
+								className='btn-block'
+								disabled={cartItems.length === 0}
+								onClick={emptyCartHandler}>
+								empty cart
 							</Button>
 						</ListGroup.Item>
 					</ListGroup>
