@@ -26,7 +26,7 @@ const reducer = combineReducers({
 	userDetails: userDetailsReducer,
 	userUpdateProfile: userUpdateProfileReducer,
 	orderCreate: orderCreateReducer,
-	orderDetails: orderCreateReducer,
+	orderDetails: orderDetailsReducer,
 })
 
 const composeEnhancers = composeWithDevTools({ trace: true, traceLimit: 25 })
