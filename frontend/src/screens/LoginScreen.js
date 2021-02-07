@@ -8,8 +8,8 @@ import FormContainer from '../components/FormContainer'
 import { login } from '../actions/userActions'
 
 const LoginScreen = ({ location, history }) => {
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
+	const [email, setEmail] = useState('admin@example.com')
+	const [password, setPassword] = useState('123456')
 
 	const dispatch = useDispatch()
 
