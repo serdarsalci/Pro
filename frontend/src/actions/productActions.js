@@ -1,4 +1,5 @@
 import axios from 'axios'
+import store from '../store'
 import {
 	PRODUCT_DETAILS_FAIL,
 	PRODUCT_DETAILS_REQUEST,
@@ -41,13 +42,19 @@ export const listProducts = () => async dispatch => {
 }
 
 // experimental
-export const getSingleProduct = (products, id) => async (
-	dispatch,
-	getState
-) => {
+export const getSingleProduct = id => async (dispatch, getState) => {
 	try {
-		dispatch({ type: GET_SINGLE_PRODUCT, payload: products, id: id })
-		console.log(products)
+		dispatch({ type: PRODUCT_DETAILS_REQUEST })
+
+		const { products } = store.getState().productList
+
+		const product = products.find(pro => pro._id === id)
+		console.log(product)
+
+		dispatch({
+			type: PRODUCT_DETAILS_SUCCESS,
+			payload: product,
+		})
 	} catch (error) {
 		console.log('getSingleproduct failed')
 		dispatch({

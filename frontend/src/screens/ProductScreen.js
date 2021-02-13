@@ -26,7 +26,7 @@ const ProductScreen = ({ history, match }) => {
 
 	// let { product } = productList
 	useEffect(() => {
-		dispatch(listProductDetails(match.params.id))
+		dispatch(getSingleProduct(match.params.id))
 	}, [dispatch, match])
 
 	// useEffect(() => {
