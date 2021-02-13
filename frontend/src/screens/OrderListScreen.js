@@ -17,22 +17,12 @@ export const OrderListScreen = ({ history }) => {
 	const { userInfo } = userLogin
 
 	useEffect(() => {
-		if (!userInfo.isAdmin) {
-			history.push('/login')
-		} else {
+		if (userInfo.isAdmin && userInfo) {
 			dispatch(listAllOrders())
+		} else {
+			history.push('/login')
 		}
 	}, [dispatch, history, userInfo])
-
-	const deleteHandler = id => {
-		// if (window.confirm('Are you sure ?')) {
-		// 	dispatch(deleteProduct(id))
-		// }
-	}
-
-	const createProductHandler = () => {
-		//	dispatch(createProduct())
-	}
 
 	return (
 		<>
@@ -59,8 +49,8 @@ export const OrderListScreen = ({ history }) => {
 						<tr>
 							<th>User</th>
 							<th>ORD DATE</th>
-							<th>Total Price</th>
-							<th>Delivered</th>
+							<th>TOTAL PRICE</th>
+							<th>DELIVERED</th>
 							<th>PAID</th>
 							<th></th>
 						</tr>
@@ -69,35 +59,33 @@ export const OrderListScreen = ({ history }) => {
 						{orders.map(order => (
 							<tr key={order._id}>
 								<LinkContainer to={`/admin/user/${order.user._id}/edit`}>
-									<td className='td-btn'>{order.user.name}</td>
+									<td className='td-btn'>{order.user && order.user.name}</td>
 								</LinkContainer>
 								<td>{moment(order.createdAt).format('lll')}</td>
-								<td>{order.totalPrice}</td>
+								<td>${order.totalPrice}</td>
 								<td>
 									{order.isDelivered ? (
-										<i className='fas fa-check' style={{ color: 'green' }}></i>
+										order.isDelivered.substring(0, 10)
 									) : (
 										<i className='fas fa-times' style={{ color: 'red' }}></i>
 									)}
 								</td>
 								<td>
 									{order.isPaid ? (
-										<i className='fas fa-check' style={{ color: 'green' }}></i>
+										order.paidAt.substring(0, 10)
 									) : (
+										/* <i className='fas fa-check' style={{ color: 'green' }}></i> */
 										<i className='fas fa-times' style={{ color: 'red' }}></i>
 									)}
 								</td>
 
 								<td>
-									<LinkContainer to={`/admin/order/${order._id}/edit`}>
+									<LinkContainer to={`/order/${order._id}`}>
 										<Button variant='light' className='btn-sm'>
-											<i className='fas fa-edit'></i>
+											Details
 										</Button>
 									</LinkContainer>
-									<Button
-										variant='danger'
-										className='btn-sm'
-										onClick={() => deleteHandler()}>
+									<Button variant='danger' className='btn-sm'>
 										<i className='fas fa-trash'></i>
 									</Button>
 								</td>
