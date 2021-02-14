@@ -18,7 +18,6 @@ import {
 	PRODUCT_UPDATE_REQUEST,
 	PRODUCT_UPDATE_FAIL,
 	PRODUCT_UPDATE_RESET,
-	TEST,
 } from '../constants/productConstants'
 
 export const productListReducer = (
