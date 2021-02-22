@@ -239,6 +239,8 @@ export const deleteUser = id => async (dispatch, getState) => {
 		})
 	}
 }
+
+
 export const updateUser = user => async (dispatch, getState) => {
 	console.log('updateUser userActions called')
 	try {
